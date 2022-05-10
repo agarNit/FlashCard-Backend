@@ -11,6 +11,7 @@ from functools import wraps
 import jwt, pdfkit, os
 from backend.api import deck
 from flask_mail import Message, Mail
+from backend import tasks
 
 mail = Mail(app)
 

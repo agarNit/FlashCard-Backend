@@ -5,6 +5,7 @@ from backend.config import LocalDevelopmentConfig
 from flask_cors import CORS
 from flask_mail import Message, Mail
 from backend.db import Db
+from backend import workers
 import os
 
 app = None

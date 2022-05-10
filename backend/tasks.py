@@ -1,7 +1,8 @@
 from backend.workers import celery
-import datetime as dt
+import datetime as dt, os
+from flask_mail import Message, Mail
+from backend.db import Db
+from flask import current_app as app
 
-@celery.task()
-def say_hello(username):
-    print("Inside task")
-    return "Hello"
+mail = Mail(app)
+
