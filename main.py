@@ -8,6 +8,8 @@ from backend.db import Db
 from backend import workers
 import os
 
+port = int(os.environ.get('PORT', 5000))
+
 app = None
 cors = None
 celery = None
@@ -44,4 +46,4 @@ from backend.api.card import *
 from backend.auth.auth import *
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, port = port)
