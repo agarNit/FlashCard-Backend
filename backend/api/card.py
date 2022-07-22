@@ -75,7 +75,6 @@ def delete_card(deck_id,card_front):
     return cards
 
 @app.route('/<int:deck_id>/cards/delete', methods = ['DELETE'])
-@cross_origin()
 def delete_cards(deck_id):
     try:
         card = request.json
