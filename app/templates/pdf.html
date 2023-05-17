@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My pdf</title>
+    <style type="text/css">
+        @page {
+            margin: 3cm;
+            @top-left {
+                background: #82b965;
+                content: counter(page);
+                height: 1cm;
+                text-align: center;
+                width: 1cm;
+            }
+            @top-center {
+                background: #82b965;
+                content:'';
+                display: block;
+                height: 0.05cm;
+                opacity: .5;
+                width: 100%;
+            }
+            @top-right {
+                content: string(heading);
+                font-size: 9pt;
+                height: 1cm;
+                vertical-align: middle;
+                width: 100%;
+            }  
+        }
+        @page: first {
+            background-size: cover;
+            margin: 0;
+        }
+
+        @page chapter {
+            background: #82b965;
+            margin: 0;
+            @top-left { content: none}
+            @top-center { content: none}
+            @top-right { content: none}
+        }
+        
+        footer {
+          text-align: center;
+          padding: 3px;
+          background-color: DarkSalmon;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+    <center><h1> Report</h1>
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</center>
+    {% if decks|length == 0 %}
+        <h4>No decks found</h4>
+    {% else %}
+        <h4> Decks </h4>
+        {% for deck in decks %} 
+        <div >
+            <b><i><div style="color:red">Deck Name: {{deck.deck_name}}</div></i></b>
+            <div>Deck ID: {{deck.deck_id}}</div>
+            <div>Deck Score: {{deck.deck_score}}</div>
+            <div>Last Review Time: {{deck.deck_last_review_time}}</div>
+        </div>
+        <p><p>
+        {% endfor %}
+    {% endif %}
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    {% if cards|length == 0 %}
+        <h4>No cards found</h4>
+    {% else %}
+        <h4>Cards</h4>
+        {% for card in cards %} 
+        <div>
+            <div>Deck ID: {{card.deck_id}}</div>
+            <div>Card ID: {{card.card_id}}</div>
+            <b><i><div style="color:blue"> Card Front: {{card.card_front}}</div></i></b>
+            <b><i><div style="color:blue">Card Back: {{card.card_back}}</div></i></b>
+            <div>Card Score: {{card.card_score}}</div>
+            <div>Last Review Time: {{card.card_last_review_time}}</div>
+        </div>
+        <p></p>
+        {% endfor %}
+    {% endif %}
+
+</body>
+<footer>
+    <p>&copy; | {{email}} | 2022</p>
+</footer>
+</html>
