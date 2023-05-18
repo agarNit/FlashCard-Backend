@@ -1,16 +1,13 @@
 from flask import Flask, make_response, render_template
 from backend.database import db
-from backend import workers
 from backend.config import LocalDevelopmentConfig
 from flask_cors import CORS
 from flask_mail import Message, Mail
 from backend.db import Db
-from backend import workers
 import os
 
 app = None
 cors = None
-celery = None
 mail = None
 
 def create_app():
@@ -27,16 +24,9 @@ def create_app():
     mail = Mail(app)
     db.init_app(app)
     app.app_context().push()
-    celery = workers.celery
-    celery.conf.update(
-        broker_url = app.config["CELERY_BROKER_URL"],
-        result_backend = app.config["CELERY_RESULT_BACKEND"]
-    )
-    celery.Task = workers.ContextTask
-    app.app_context().push()
-    return app,cors,celery,mail
+    return app,cors,mail
     
-app,cors,celery,mail = create_app()
+app,cors,mail = create_app()
 
 from backend.api.user import *
 from backend.api.deck import *

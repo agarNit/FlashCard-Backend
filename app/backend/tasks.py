@@ -1,4 +1,3 @@
-from backend.workers import celery
 import datetime as dt, os
 from flask_mail import Message, Mail
 from backend.db import Db
