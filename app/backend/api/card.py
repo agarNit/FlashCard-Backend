@@ -72,6 +72,7 @@ def delete_card(deck_id,card_front):
     cards = Db.all_cards(deck_id)
     if cards is None:
         return "No cards found"
+    print(cards)
     return cards
 
 @app.route('/<int:deck_id>/cards/delete', methods = ['DELETE'])
@@ -95,6 +96,7 @@ def easy(card_id):
     except ValidationError as err:
         return error_response(400, err.messages)
     new_card = Db.update_easy(card_id=card_id)
+    print(new_card)
     return new_card 
 
 @app.route("/cards/<card_id>/medium", methods = ['GET'])

@@ -12,6 +12,7 @@ import jwt, pdfkit, os
 from backend.api import deck
 from flask_mail import Message, Mail
 from backend import tasks
+from pathlib import Path
 
 mail = Mail(app)
 
@@ -119,7 +120,7 @@ def send(username):
    user = Db.get_user_by_name(username)
    msg = Message('Report Generation', sender ='FlaskCard@gmail.com',recipients = [user.get('email')])
    msg.body = 'Dear {}, Your report has been generated successfully !!'.format(user.get('name'))
-   cd1 = os.path.join(os.environ['HOME'] + "/Downloads")
+   cd1 = str(os.path.join(Path.home(), "Downloads"))
    with app.open_resource("{}/{}.pdf".format(cd1, user.get('name'))) as fp:  
         msg.attach("{}.pdf".format(user.get('name')),"application/pdf",fp.read())  
         mail.send(msg)
