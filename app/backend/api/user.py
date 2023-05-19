@@ -118,7 +118,7 @@ def pdf_template(username):
 @app.route("/send/<string:username>", methods = ['GET'])
 def send(username):
    user = Db.get_user_by_name(username)
-   msg = Message('Report Generation', sender ='FlaskCard@gmail.com',recipients = [user.get('email')])
+   msg = Message('Report Generation', sender ='flaskcard@gmail.com',recipients = [user.get('email')])
    msg.body = 'Dear {}, Your report has been generated successfully !!'.format(user.get('name'))
    cd1 = str(os.path.join(Path.home(), "Downloads"))
    with app.open_resource("{}/{}.pdf".format(cd1, user.get('name'))) as fp:  
