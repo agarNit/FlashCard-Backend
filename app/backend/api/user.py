@@ -122,6 +122,6 @@ def send(username):
    msg.body = 'Dear {}, Your report has been generated successfully !!'.format(user.get('name'))
    cd1 = str(os.path.join(Path.home(), "Downloads"))
    with app.open_resource("{}/{}.pdf".format(cd1, user.get('name'))) as fp:  
-        msg.attach("{}.pdf".format(user.get('name')),"application/pdf",fp.read())  
+        msg.attach("{}.pdf".format(user.get('name')),"application/json",fp.read())  
         mail.send(msg)
    return 'Sent'
